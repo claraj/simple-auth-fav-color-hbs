@@ -50,7 +50,8 @@ router.post('/login', passport.authenticate('local-login', {
 
 /* GET Logout */
 router.get('/logout', function(req, res, next) {
-  req.logout();         //passport middleware adds these functions to req object.
+    //passport middleware adds the logout functions to req object.
+  req.logout();
   res.redirect('/');
 });
 
@@ -81,6 +82,7 @@ router.post('/saveSecrets', isLoggedIn, function(req, res, next){
     req.user.favorites.luckyNumber = req.body.luckyNumber;
   }
 
+console.log(req.body)
   //And save the modified user, to save the new data.
   req.user.save(function(err) {
     if (err) {
@@ -122,4 +124,3 @@ function isLoggedIn(req, res, next) {
 
 
 module.exports = router;
-
